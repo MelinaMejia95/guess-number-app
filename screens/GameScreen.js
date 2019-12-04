@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
+import DefaultStyles from '../constants/default-styles';
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -23,7 +24,7 @@ const GameScreen = props => {
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
 
-  const {userChoice, onGameOver} = props;
+  const { userChoice, onGameOver } = props;
 
   useEffect(() => {
     if (currentGuess === userChoice) {
@@ -34,11 +35,11 @@ const GameScreen = props => {
   const nextGuessHandler = direction => {
     if ((direction === 'lower' && currentGuess < props.userChoice) || (direction === 'greater' && currentGuess > props.userChoice)) {
       Alert.alert(
-        'Don\'t lie!!', 
-        'You know that this is wrong...', 
-        [{text: 'Sorry!', style: 'cancel'}]
+        'Don\'t lie!!',
+        'You know that this is wrong...',
+        [{ text: 'Sorry!', style: 'cancel' }]
       );
-      return ;
+      return;
     }
     if (direction === 'lower') {
       currentHigh.current = currentGuess;
@@ -52,7 +53,7 @@ const GameScreen = props => {
 
   return (
     <View style={styles.screen}>
-      <Text>Opponent's Guess</Text>
+      <Text style={DefaultStyles.title}>Opponent's Guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <Button title='LOWER' onPress={nextGuessHandler.bind(this, 'lower')} />
