@@ -14,12 +14,10 @@ import MainButton from '../components/MainButton';
 import Colors from '../constants/colors';
 
 const GameOverScreen = props => {
-  const [availableDeviceWidth, setAvailableDeviceWidth] = useState(Dimensions.get('window').width);
   const [availableDeviceHeight, setAvailableDeviceHeight] = useState(Dimensions.get('window').height);
 
   useEffect(() => {
     const updateLayout = () => {
-      setAvailableDeviceWidth(Dimensions.get('window').width);
       setAvailableDeviceHeight(Dimensions.get('window').height);
     };
 
@@ -34,14 +32,7 @@ const GameOverScreen = props => {
     <ScrollView>
       <View style={styles.screen}>
         <TitleText>The Game is Over!</TitleText>
-        <View style={{
-          ...styles.imageContainer, ...{
-            width: availableDeviceWidth * 0.7,
-            height: availableDeviceWidth * 0.7,
-            borderRadius: (availableDeviceWidth * 0.7) / 2,
-            marginVertical: availableDeviceHeight / 30
-          }
-        }}>
+        <View style={styles.imageContainer}>
           <Image
             source={require('../assets/success.png')}
             // source={{ uri: '' }}  Images from the web
@@ -82,6 +73,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'black',
     overflow: 'hidden',
+    maxWidth: 300,
     marginVertical: 30
   },
   image: {
@@ -94,11 +86,11 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     marginHorizontal: 30,
-    marginVertical: 15
+    // marginVertical: 15
   },
   resultText: {
     textAlign: 'center',
-    fontSize: 20
+    // fontSize: 20
   }
 });
 
